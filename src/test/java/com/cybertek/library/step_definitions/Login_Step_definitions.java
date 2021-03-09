@@ -6,6 +6,11 @@ import com.cybertek.library.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Login_Step_definitions {
 
@@ -30,7 +35,16 @@ String url = ConfigurationReader.getProperty("qa2_url");
 
     }
     @Then("I a should see dashboard")
-    public void i_a_should_see_dashboard() {
+    public void i_a_should_see_dashboard()throws InterruptedException {
+
+        String expected = "dashboard";
+
+        WebDriverWait wait= new WebDriverWait(Driver.getDriver(),10);
+        wait.until(ExpectedConditions.urlContains(expected));
+
+        String actual = Driver.getDriver().getCurrentUrl();
+        System.out.println("actual = " + actual);
+
 
     }
 }
