@@ -45,6 +45,34 @@ String url = ConfigurationReader.getProperty("qa2_url");
         String actual = Driver.getDriver().getCurrentUrl();
         System.out.println("actual = " + actual);
 
+        Driver.closeDriver();
+
+
+    }
+
+
+
+    @When("I login as a student")
+    public void iLoginAsAStudent() {
+
+        String username=ConfigurationReader.getProperty("stu18_user");
+        String password=ConfigurationReader.getProperty("stu18_pass");
+
+        loginPage.usernameInput.sendKeys(username);
+        loginPage.passwordInput.sendKeys(password);
+        loginPage.signInButton.click();
+    }
+
+    @Then("books should be displayed")
+
+    public void booksShouldBeDisplayed() {
+        String expected = "books";
+
+        WebDriverWait wait= new WebDriverWait(Driver.getDriver(),10);
+        wait.until(ExpectedConditions.urlContains(expected));
+
+        String actual = Driver.getDriver().getCurrentUrl();
+        System.out.println("actual = " + actual);
 
     }
 }
